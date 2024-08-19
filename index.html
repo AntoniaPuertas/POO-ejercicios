@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Programación Orientada a Objetos en JavaScript</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <h1>Programación Orientada a Objetos en JavaScript</h1>
+    
+    <p>La Programación Orientada a Objetos (POO) es un paradigma de programación que organiza el diseño de software en torno a datos u objetos, en lugar de funciones y lógica. Veamos cómo se implementa en JavaScript.</p>
+    
+    <h2>1. Object Literal</h2>
+    <p>La forma más sencilla de crear un objeto en JavaScript es usando la notación de objeto literal.</p>
+    <code>
+const persona = {
+    nombre: "Ana",
+    edad: 30,
+    saludar: function() {
+        console.log(`Hola, soy ${this.nombre}`);
+    }
+};
+
+persona.saludar(); // Imprime: Hola, soy Ana
+    </code>
+    
+    <h2>2. Object Constructor</h2>
+    <p>Los constructores son funciones que se utilizan para crear nuevos objetos con propiedades y métodos similares.</p>
+    <code>
+function Persona(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+    this.saludar = function() {
+        console.log(`Hola, soy ${this.nombre}`);
+    };
+}
+
+const ana = new Persona("Ana", 30);
+ana.saludar(); // Imprime: Hola, soy Ana
+    </code>
+    
+    <h2>3. Instancia</h2>
+    <p>Una instancia es un objeto específico creado a partir de un constructor.</p>
+    <code>
+const juan = new Persona("Juan", 25);
+juan.saludar(); // Imprime: Hola, soy Juan
+    </code>
+    
+    <h2>4. Prototype</h2>
+    <p>El prototype es un objeto del que otros objetos heredan propiedades. Se usa para añadir propiedades y métodos a todos los objetos de un tipo específico.</p>
+    <code>
+Persona.prototype.presentarse = function() {
+    console.log(`Me llamo ${this.nombre} y tengo ${this.edad} años.`);
+};
+
+juan.presentarse(); // Imprime: Me llamo Juan y tengo 25 años.
+    </code>
+    
+    <h2>5. Clases en JavaScript (ES6+)</h2>
+    <p>Desde ECMAScript 2015 (ES6), JavaScript introdujo una sintaxis de clase más similar a otros lenguajes orientados a objetos.</p>
+    <code>
+class Persona {
+    constructor(nombre, edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    saludar() {
+        console.log(`Hola, soy ${this.nombre}`);
+    }
+
+    presentarse() {
+        console.log(`Me llamo ${this.nombre} y tengo ${this.edad} años.`);
+    }
+}
+
+const maria = new Persona("María", 28);
+maria.saludar(); // Imprime: Hola, soy María
+maria.presentarse(); // Imprime: Me llamo María y tengo 28 años.
+    </code>
+    
+    <div class="nota">
+        <strong>Nota:</strong> Aunque la sintaxis de clase en JavaScript parece similar a la de otros lenguajes, internamente sigue funcionando a través del sistema de prototipos de JavaScript.
+    </div>
+</body>
+</html>
