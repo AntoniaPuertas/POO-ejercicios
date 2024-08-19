@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Herencia en JavaScript</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <h1>Herencia en JavaScript</h1>
+    
+    <p>La herencia es un concepto fundamental en la Programación Orientada a Objetos que permite crear nuevas clases basadas en clases existentes. En JavaScript, la herencia se puede implementar de varias maneras. Veamos cómo funciona.</p>
+    
+    <h2>1. Herencia con Prototipos</h2>
+    <p>Antes de ES6, la herencia en JavaScript se implementaba principalmente usando prototipos.</p>
+    <code>
+// Clase padre
+function Animal(nombre) {
+    this.nombre = nombre;
+}
+
+Animal.prototype.saludar = function() {
+    console.log(`Hola, soy ${this.nombre}`);
+};
+
+// Clase hija
+function Perro(nombre, raza) {
+    Animal.call(this, nombre); // Llamada al constructor padre
+    this.raza = raza;
+}
+
+// Establecer la herencia
+Perro.prototype = Object.create(Animal.prototype);
+Perro.prototype.constructor = Perro;
+
+// Agregar un método específico de Perro
+Perro.prototype.ladrar = function() {
+    console.log("¡Guau guau!");
+};
+
+const miPerro = new Perro("Buddy", "Labrador");
+miPerro.saludar(); // Imprime: Hola, soy Buddy
+miPerro.ladrar(); // Imprime: ¡Guau guau!
+    </code>
+    
+    <h2>2. Herencia con Clases (ES6+)</h2>
+    <p>Con la introducción de las clases en ES6, la sintaxis para implementar herencia se volvió más clara y similar a otros lenguajes orientados a objetos.</p>
+    <code>
+class Animal {
+    constructor(nombre) {
+        this.nombre = nombre;
+    }
+
+    saludar() {
+        console.log(`Hola, soy ${this.nombre}`);
+    }
+}
+
+class Perro extends Animal {
+    constructor(nombre, raza) {
+        super(nombre); // Llamada al constructor padre
+        this.raza = raza;
+    }
+
+    ladrar() {
+        console.log("¡Guau guau!");
+    }
+}
+
+const miPerro = new Perro("Max", "Golden Retriever");
+miPerro.saludar(); // Imprime: Hola, soy Max
+miPerro.ladrar(); // Imprime: ¡Guau guau!
+    </code>
+    
+    <h2>3. Sobrescritura de Métodos</h2>
+    <p>Las clases hijas pueden sobrescribir los métodos de la clase padre para modificar o extender su comportamiento.</p>
+    <code>
+class Gato extends Animal {
+    constructor(nombre) {
+        super(nombre);
+    }
+
+    saludar() {
+        super.saludar(); // Llamada al método padre
+        console.log("Soy un gato.");
+    }
+
+    maullar() {
+        console.log("¡Miau!");
+    }
+}
+
+const miGato = new Gato("Whiskers");
+miGato.saludar();
+// Imprime:
+// Hola, soy Whiskers
+// Soy un gato.
+miGato.maullar(); // Imprime: ¡Miau!
+    </code>
+    
+    <h2>4. Herencia Multinivel</h2>
+    <p>JavaScript también permite la herencia multinivel, donde una clase puede heredar de otra clase que a su vez hereda de otra.</p>
+    <code>
+class Vehiculo {
+    constructor(tipo) {
+        this.tipo = tipo;
+    }
+
+    describir() {
+        console.log(`Este es un ${this.tipo}`);
+    }
+}
+
+class Coche extends Vehiculo {
+    constructor(marca) {
+        super("coche");
+        this.marca = marca;
+    }
+
+    describir() {
+        super.describir();
+        console.log(`Es un ${this.marca}`);
+    }
+}
+
+class CocheElectrico extends Coche {
+    constructor(marca, autonomia) {
+        super(marca);
+        this.autonomia = autonomia;
+    }
+
+    describir() {
+        super.describir();
+        console.log(`Tiene una autonomía de ${this.autonomia} km`);
+    }
+}
+
+const miCocheElectrico = new CocheElectrico("Tesla", 500);
+miCocheElectrico.describir();
+// Imprime:
+// Este es un coche
+// Es un Tesla
+// Tiene una autonomía de 500 km
+    </code>
+    
+    <div class="nota">
+        <strong>Nota:</strong> Aunque la herencia es una herramienta poderosa, es importante usarla con moderación. En muchos casos, la composición (combinar objetos simples para crear otros más complejos) puede ser una alternativa más flexible y mantenible.
+    </div>
+    
+</body>
+</html>
